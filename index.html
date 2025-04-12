@@ -1,0 +1,39 @@
+<div id="form-message" style="text-align:center; margin-bottom: 20px; font-weight: bold;"></div>
+
+<form id="timeOffForm" style="max-width: 600px; margin: auto; font-family: Arial, sans-serif;">
+    <h2>Time Off Request</h2>
+    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+        <input type="text" name="first_name" placeholder="First Name" required
+            style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #000;">
+        <input type="text" name="middle_name" placeholder="Middle Name"
+            style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #000;">
+        <input type="text" name="last_name" placeholder="Last Name" required
+            style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #000;">
+    </div>
+    <input type="email" name="email" placeholder="example@example.com" required
+        style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #000; margin-bottom: 20px;"><br>
+    <button type="submit"
+        style="background-color: #00C853; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer;">Submit</button>
+</form>
+
+<script>
+    document.getElementById("timeOffForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        fetch("https://script.google.com/a/macros/cuwahn.com/s/AKfycbww6j92hKaIzFguDummqeSHNUoq288qkm2qmqcYfH9eeo-QAv2CrA-ydWb5ZZGaWYzOmg/exec", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.text())
+            .then(result => {
+                document.getElementById("form-message").innerText = "✅ Submitted successfully!";
+                form.reset();
+            })
+            .catch(error => {
+                document.getElementById("form-message").innerText = "❌ Something went wrong!";
+                console.error("Error:", error);
+            });
+    });
+</script>
